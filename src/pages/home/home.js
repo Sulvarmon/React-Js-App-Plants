@@ -6,13 +6,18 @@ import Header from '../../reusableComponents/header/header.js';
 import APlant from '../../reusableComponents/aPlant/aPlant.js';
 
 function Home(props) {
-    const [plants, setPlants] = useState(false);
+    const [plants, setPlants] = useState([]);
+    let [plantsApiPageNumber, setPlantsApiPageNumber] = useState(1);
     const [imageAndTextArray, setImageAndTextArray] = useState(false);
+    const [plantsGridArray, setPlantsGridArray] = useState([])
 
     useEffect(() => {
         const getPlants = async () => {
-            const fetchedPlants = await fetchPlants(1);
+            const fetchedPlants = await fetchPlants(plantsApiPageNumber);
             setPlants(fetchedPlants);
+            if (fetchedPlants.length > 0) {
+                setPlantsGridArray(prevState => prevState.concat(fetchedPlants));
+            }
 
             const array = { img: [], commonName: [], scientificName: [] }
             for (let i = 0; i < numberOfSlides.homePageCarouselSlides; i++) {
@@ -24,13 +29,13 @@ function Home(props) {
         };
 
         getPlants();
-    });
+    }, [plantsApiPageNumber]);
+
+    console.log(plantsGridArray)
 
     function loadMorePlants() {
-        alert('clicked')
+        setPlantsApiPageNumber(++plantsApiPageNumber)
     }
-
-    console.log(plants)
 
     return (
         <div className='d-flex flex-column gap-2'>
@@ -42,8 +47,8 @@ function Home(props) {
             <div className="d-flex flex-wrap gap-3 justify-content-center align-items-center bbt p-4 m-auto rounded">
 
                 {
-                    plants && (<>
-                        {plants.map((element, index) => (
+                    (plantsGridArray.length > 0) && (<>
+                        {plantsGridArray.map((element, index) => (
                             <APlant
                                 key={index}
                                 id={index}
@@ -56,9 +61,6 @@ function Home(props) {
                     </>
                     )
                 }
-
-
-
             </div>
 
         </div>

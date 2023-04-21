@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback } from "react"
 import { FaArrowRight, FaArrowLeft, FaWindowClose } from 'react-icons/fa';
 import './carousel.css'
 
@@ -8,7 +8,7 @@ import './carousel.css'
 function Carousel(props) {
 
     const [count, setCount] = useState(0);
-    const [array, setArray] = useState(() => {
+    const [array] = useState(() => {
         const numberOfSlides = props.numberOfSlides
         const array = []
         for (let i = 0; i < numberOfSlides; i++) {
@@ -17,13 +17,13 @@ function Carousel(props) {
         return array
     })
 
-    function defLeftProp() {
+    const defLeftProp = useCallback(() => {
         let carouselItemsArray = document.querySelectorAll(".carousel_item")
         let widthOfCarouselItem = carouselItemsArray[0].offsetWidth
         for (let i = 0; i < carouselItemsArray.length; i++) {
             carouselItemsArray[i].style.left = (count + i) * widthOfCarouselItem + "px"
         }
-    }
+    }, [count]);
 
     let decreaseCount = () => {
         let carouselItemsArray = document.querySelectorAll(".carousel_item")
@@ -44,7 +44,7 @@ function Carousel(props) {
     useEffect(() => {
         defLeftProp()
 
-    }, [count])
+    }, [count, defLeftProp])
 
     useEffect(() => {
         if (props.imageAndTextArray) {
