@@ -1,0 +1,57 @@
+.carousel_left_arr {
+  position: absolute;
+  bottom: 1mm;
+  left: 0;
+  transform: translate(50%, -50%);
+  z-index: 10;
+  color: #fff;
+}
+
+.carousel_right_arr {
+  position: absolute;
+  bottom: 1mm;
+  right: 0;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  z-index: 10;
+}
+
+.carousel_content_cont {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  margin: auto;
+}
+
+.carousel_item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+}
+
+.expand_image {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.9);
+  background-position: center;
+  background-size: auto;
+  background-repeat: no-repeat;
+  z-index: 1000;
+  cursor: auto;
+}
+
+.common_and_sc_name_expanded_cont {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}

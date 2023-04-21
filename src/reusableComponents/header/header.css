@@ -1,0 +1,13 @@
+.slideMenu {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    top: 124px;
+    right: -5000px;
+    z-index: 100;
+    transition: right 0.2s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

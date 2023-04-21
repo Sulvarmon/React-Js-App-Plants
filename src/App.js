@@ -1,23 +1,22 @@
-import logo from './logo.svg';
+import NotFound from './pages/notFound/notFound';
 import './App.css';
+import Home from './pages/home/home';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+
 
 function App() {
+
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='container container-md gx-0 overflow-hidden position-relative'>
+      <div className='background_image'></div>
+      <BrowserRouter>
+        <Routes>
+          <Route exact={true} path="/" element={<Home />} />
+          <Route path='*' element={<NotFound />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }

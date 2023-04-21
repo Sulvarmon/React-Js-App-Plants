@@ -1,38 +1,55 @@
-.App {
-  text-align: center;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+a {
+  text-decoration: none !important;
+  color: #fff !important;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.background_image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: url("./img/bg.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: -1000;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+/* cursor pointer */
+.cp {
+  cursor: pointer;
 }
 
-.App-link {
-  color: #61dafb;
+/* width fit */
+.wf {
+  width: fit-content;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* text underline offset */
+.tuo {
+  text-underline-offset: 0.5em;
+}
+
+/* hover link */
+.hl {
+  text-decoration: none !important;
+  border: none;
+  color: #fff;
+}
+
+.hl:hover {
+  color: darkgoldenrod !important;
+  transition: 0.2s ease-in-out;
+}
+
+/* background black transparent */
+.bbt {
+  background-color: rgba(0, 0, 0, 0.75);
 }
