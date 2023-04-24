@@ -4,6 +4,7 @@ import { React, useState, useEffect } from 'react';
 import Carousel from '../../reusableComponents/carousel/carousel.js';
 import Header from '../../reusableComponents/header/header.js';
 import APlant from '../../reusableComponents/aPlant/aPlant.js';
+import ExpandImage from '../../reusableComponents/expandImage/expandImage.js';
 
 function Home(props) {
     const [plants, setPlants] = useState([]);
@@ -37,6 +38,22 @@ function Home(props) {
         setPlantsApiPageNumber(++plantsApiPageNumber)
     }
 
+    function zoomImage(event) {
+        if (imageAndTextArray) {
+            const clickedElement = event.target;
+            const expandImage = document.querySelector('.expand_image')
+            const commonName = clickedElement.childNodes[0].childNodes[0].childNodes[1].textContent
+            const scientificName = clickedElement.childNodes[0].childNodes[1].childNodes[1].textContent
+            const clickedElementStyle = getComputedStyle(clickedElement);
+            const backgroundImage = clickedElementStyle.backgroundImage;
+            expandImage.style.backgroundImage = `${backgroundImage}`
+            expandImage.childNodes[1].childNodes[0].childNodes[1].textContent = commonName
+            expandImage.childNodes[1].childNodes[1].childNodes[1].textContent = scientificName
+            expandImage.style.display = "block"
+        }
+    }
+
+
     return (
         <div className='d-flex flex-column gap-2'>
             <Header />
@@ -49,20 +66,22 @@ function Home(props) {
                 {
                     (plantsGridArray.length > 0) && (<>
                         {plantsGridArray.map((element, index) => (
-                            <APlant
-                                key={index}
-                                id={index}
-                                commonName={element.common_name}
-                                scientificName={element.scientific_name}
-                                bgImage={"url(" + element.image_url + ")"}
-                            />
+                            <div key={index} onClick={zoomImage}>
+                                <APlant
+                                    id={index}
+                                    commonName={element.common_name}
+                                    scientificName={element.scientific_name}
+                                    bgImage={"url(" + element.image_url + ")"}
+                                />
+                            </div>
+
                         ))}
                         <div className='load_more_plants btn btn-primary' onClick={loadMorePlants}>Load More Plants</div>
                     </>
                     )
                 }
             </div>
-
+            <ExpandImage />
         </div>
     );
 }
