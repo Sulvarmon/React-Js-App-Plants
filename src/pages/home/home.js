@@ -7,24 +7,23 @@ import APlant from '../../reusableComponents/aPlant/aPlant.js';
 import ExpandImage from '../../reusableComponents/expandImage/expandImage.js';
 
 function Home(props) {
-    const [plants, setPlants] = useState([]);
     let [plantsApiPageNumber, setPlantsApiPageNumber] = useState(1);
     const [imageAndTextArray, setImageAndTextArray] = useState(false);
     const [plantsGridArray, setPlantsGridArray] = useState([])
 
     useEffect(() => {
         const getPlants = async () => {
-            const fetchedPlants = await fetchPlants(plantsApiPageNumber);
-            setPlants(fetchedPlants);
+            const fetchedPlants = await fetchPlants(plantsApiPageNumber);          
+            const fetchedPopularPlants = await fetchPlants(20);          
             if (fetchedPlants.length > 0) {
                 setPlantsGridArray(prevState => prevState.concat(fetchedPlants));
             }
 
             const array = { img: [], commonName: [], scientificName: [] }
             for (let i = 0; i < numberOfSlides.homePageCarouselSlides; i++) {
-                array.img.push(fetchedPlants[i].image_url)
-                array.commonName.push(fetchedPlants[i].common_name)
-                array.scientificName.push(fetchedPlants[i].scientific_name)
+                array.img.push(fetchedPopularPlants[i].image_url)
+                array.commonName.push(fetchedPopularPlants[i].common_name)
+                array.scientificName.push(fetchedPopularPlants[i].scientific_name)
             }
             setImageAndTextArray(array)
         };
@@ -32,14 +31,12 @@ function Home(props) {
         getPlants();
     }, [plantsApiPageNumber]);
 
-    console.log(plantsGridArray)
-
     function loadMorePlants() {
         setPlantsApiPageNumber(++plantsApiPageNumber)
     }
 
     function zoomImage(event) {
-        if (imageAndTextArray) {
+        if (plantsGridArray) {
             const clickedElement = event.target;
             const expandImage = document.querySelector('.expand_image')
             const commonName = clickedElement.childNodes[0].childNodes[0].childNodes[1].textContent

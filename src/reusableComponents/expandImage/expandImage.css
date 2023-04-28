@@ -1,0 +1,21 @@
+.expand_image {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.9);
+    background-position: center;
+    background-size: auto;
+    background-repeat: no-repeat;
+    z-index: 1000;
+    cursor: auto;
+}
+
+.common_and_sc_name_expanded_cont {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
