@@ -5,7 +5,7 @@ import APlant from '../../reusableComponents/aPlant/aPlant';
 import ExpandImage from '../../reusableComponents/expandImage/expandImage';
 
 function ChoosePage(props) {
-
+    const TOTALPAGES = 10000
     const [plants, setPlants] = useState([]);
     const [pageNumber, setPageNumber] = useState(1);
 
@@ -18,9 +18,6 @@ function ChoosePage(props) {
       }, [pageNumber]);   
 
     function changeGetBtnText(event){
-        if(event.keyCode === 13){
-            getPlantsOfThePage()
-        }
         const input = document.getElementById("chosen_page_number").value
         const pageNumberSpan = document.getElementById("page_number_on_btn")              
         if (input === "") {
@@ -28,12 +25,15 @@ function ChoosePage(props) {
         }else{
             pageNumberSpan.textContent = input
         }
+        if(event.keyCode === 13){
+            getPlantsOfThePage()
+        }
+        
     }
 
     function getPlantsOfThePage(){
         const pageNumberSpan = document.getElementById("page_number_on_btn").textContent
-        const input = document.getElementById("chosen_page_number").value
-        if (parseInt(pageNumberSpan) < 10000){            
+        if (parseInt(pageNumberSpan) < TOTALPAGES){            
             setPageNumber(parseInt(pageNumberSpan))
             const pageNumberSpanTitle = document.getElementById("page_number_title")        
             pageNumberSpanTitle.textContent = pageNumberSpan
